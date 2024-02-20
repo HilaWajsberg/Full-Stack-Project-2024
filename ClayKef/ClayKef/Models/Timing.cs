@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DAL.Models;
+namespace ClayKef.Models;
 
 public partial class Timing
 {
@@ -12,4 +12,6 @@ public partial class Timing
     public double Hour { get; set; }
 
     public DateTime? Date { get; set; }
+
+    public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
 }

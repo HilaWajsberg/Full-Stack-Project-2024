@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.Models;
+namespace ClayKef.Models;
 
-public partial class UniversitiesDB : DbContext
+public partial class ClayKefDB : DbContext
 {
-    public UniversitiesDB()
+    public ClayKefDB()
     {
     }
 
-    public UniversitiesDB(DbContextOptions<UniversitiesDB> options)
+    public ClayKefDB(DbContextOptions<ClayKefDB> options)
         : base(options)
     {
     }
@@ -25,6 +25,8 @@ public partial class UniversitiesDB : DbContext
 
     public virtual DbSet<Member> Members { get; set; }
 
+    public virtual DbSet<MemberToGroup> MemberToGroups { get; set; }
+
     public virtual DbSet<Pricing> Pricings { get; set; }
 
     public virtual DbSet<ProductType> ProductTypes { get; set; }
@@ -33,7 +35,7 @@ public partial class UniversitiesDB : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\ClayKef\\DAL\\Database.mdf;Integrated Security=True;Connect Timeout=30");
+        => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\Full-Stack-Project-2024\\ClayKef\\DAL\\Database.mdf;Integrated Security=True;Connect Timeout=30");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -73,6 +75,7 @@ public partial class UniversitiesDB : DbContext
             entity.Property(e => e.AgeCode).HasColumnName("ageCode");
             entity.Property(e => e.DurationCode).HasColumnName("durationCode");
             entity.Property(e => e.GroupLevelCode).HasColumnName("groupLevelCode");
+            entity.Property(e => e.MemberToGroupCode).HasColumnName("memberToGroupCode");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsFixedLength()
@@ -84,6 +87,40 @@ public partial class UniversitiesDB : DbContext
             entity.Property(e => e.PricingCode).HasColumnName("pricingCode");
             entity.Property(e => e.ProductTypeCode).HasColumnName("productTypeCode");
             entity.Property(e => e.TimingCode).HasColumnName("timingCode");
+
+            entity.HasOne(d => d.AgeCodeNavigation).WithMany(p => p.Groups)
+                .HasForeignKey(d => d.AgeCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("groupToAge");
+
+            entity.HasOne(d => d.DurationCodeNavigation).WithMany(p => p.Groups)
+                .HasForeignKey(d => d.DurationCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("groupToDuration");
+
+            entity.HasOne(d => d.GroupLevelCodeNavigation).WithMany(p => p.Groups)
+                .HasForeignKey(d => d.GroupLevelCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("groupToGroupLevel");
+
+            entity.HasOne(d => d.MemberToGroupCodeNavigation).WithMany(p => p.Groups)
+                .HasForeignKey(d => d.MemberToGroupCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("groupToMemberToGroup");
+
+            entity.HasOne(d => d.PricingCodeNavigation).WithMany(p => p.Groups)
+                .HasForeignKey(d => d.PricingCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("groupToPricing");
+
+            entity.HasOne(d => d.ProductTypeCodeNavigation).WithMany(p => p.Groups)
+                .HasForeignKey(d => d.ProductTypeCode)
+                .HasConstraintName("groupToProductType");
+
+            entity.HasOne(d => d.TimingCodeNavigation).WithMany(p => p.Groups)
+                .HasForeignKey(d => d.TimingCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("groupToTiming");
         });
 
         modelBuilder.Entity<GroupLevel>(entity =>
@@ -118,12 +155,28 @@ public partial class UniversitiesDB : DbContext
                 .HasMaxLength(50)
                 .IsFixedLength()
                 .HasColumnName("firstName");
-            entity.Property(e => e.GroupCode).HasColumnName("groupCode");
             entity.Property(e => e.LastName)
                 .HasMaxLength(50)
                 .IsFixedLength()
                 .HasColumnName("lastName");
+            entity.Property(e => e.MemberToGroupCode).HasColumnName("memberToGroupCode");
             entity.Property(e => e.TOrP).HasColumnName("tOrP");
+
+            entity.HasOne(d => d.MemberToGroupCodeNavigation).WithMany(p => p.Members)
+                .HasForeignKey(d => d.MemberToGroupCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("memberToMemberToGroup");
+        });
+
+        modelBuilder.Entity<MemberToGroup>(entity =>
+        {
+            entity.HasKey(e => e.Code).HasName("PK__MemberTo__357D4CF8C6486A60");
+
+            entity.ToTable("MemberToGroup");
+
+            entity.Property(e => e.Code).HasColumnName("code");
+            entity.Property(e => e.GroupCode).HasColumnName("groupCode");
+            entity.Property(e => e.MemberCode).HasColumnName("memberCode");
         });
 
         modelBuilder.Entity<Pricing>(entity =>
@@ -152,6 +205,11 @@ public partial class UniversitiesDB : DbContext
                 .HasMaxLength(50)
                 .IsFixedLength()
                 .HasColumnName("type");
+
+            entity.HasOne(d => d.PricingCodeNavigation).WithMany(p => p.ProductTypes)
+                .HasForeignKey(d => d.PricingCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("productToPricing");
         });
 
         modelBuilder.Entity<Timing>(entity =>

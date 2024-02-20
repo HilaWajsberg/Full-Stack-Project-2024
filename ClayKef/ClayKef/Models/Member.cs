@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DAL.Models;
+namespace ClayKef.Models;
 
 public partial class Member
 {
@@ -15,7 +15,9 @@ public partial class Member
 
     public string? Email { get; set; }
 
-    public int GroupCode { get; set; }
+    public int MemberToGroupCode { get; set; }
 
     public int TOrP { get; set; }
+
+    public virtual MemberToGroup MemberToGroupCodeNavigation { get; set; } = null!;
 }
