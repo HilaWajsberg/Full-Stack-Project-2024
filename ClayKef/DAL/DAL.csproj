@@ -14,9 +14,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DALImplementation\" />
-    <Folder Include="DALApi\" />
-  </ItemGroup>
-
 </Project>

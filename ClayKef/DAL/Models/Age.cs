@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ClayKef.Models;
+namespace DAL.Models;
 
 public partial class Age
 {
@@ -9,5 +9,5 @@ public partial class Age
 
     public string Name { get; set; } = null!;
 
-    public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
+    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 }

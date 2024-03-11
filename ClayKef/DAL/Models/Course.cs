@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ClayKef.Models;
+namespace DAL.Models;
 
-public partial class Group
+public partial class Course
 {
     public int Code { get; set; }
 
@@ -23,17 +23,17 @@ public partial class Group
 
     public int? ProductTypeCode { get; set; }
 
-    public int GroupLevelCode { get; set; }
+    public int CourseLevelCode { get; set; }
 
-    public int MemberToGroupCode { get; set; }
+    public int MemberToCourseCode { get; set; }
 
     public virtual Age AgeCodeNavigation { get; set; } = null!;
 
+    public virtual CourseLevel CourseLevelCodeNavigation { get; set; } = null!;
+
     public virtual Duration DurationCodeNavigation { get; set; } = null!;
 
-    public virtual GroupLevel GroupLevelCodeNavigation { get; set; } = null!;
-
-    public virtual MemberToGroup MemberToGroupCodeNavigation { get; set; } = null!;
+    public virtual MemberToCourse MemberToCourseCodeNavigation { get; set; } = null!;
 
     public virtual Pricing PricingCodeNavigation { get; set; } = null!;
 

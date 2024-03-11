@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ClayKef.Models;
+namespace DAL.Models;
 
 public partial class ProductType
 {
@@ -13,7 +13,7 @@ public partial class ProductType
 
     public int PricingCode { get; set; }
 
-    public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
+    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 
     public virtual Pricing PricingCodeNavigation { get; set; } = null!;
 }

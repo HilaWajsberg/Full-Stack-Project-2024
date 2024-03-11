@@ -2,40 +2,36 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace ClayKef.Models;
+namespace DAL.Models;
 
-public partial class ClayKefDB : DbContext
+public partial class ClayKefContext : DbContext
 {
-    public ClayKefDB()
+    public ClayKefContext()
     {
+        
     }
-
-    public ClayKefDB(DbContextOptions<ClayKefDB> options)
+    public ClayKefContext(DbContextOptions<ClayKefContext> options)
         : base(options)
     {
     }
 
     public virtual DbSet<Age> Ages { get; set; }
 
+    public virtual DbSet<Course> Courses { get; set; }
+
+    public virtual DbSet<CourseLevel> CourseLevels { get; set; }
+
     public virtual DbSet<Duration> Durations { get; set; }
-
-    public virtual DbSet<Group> Groups { get; set; }
-
-    public virtual DbSet<GroupLevel> GroupLevels { get; set; }
 
     public virtual DbSet<Member> Members { get; set; }
 
-    public virtual DbSet<MemberToGroup> MemberToGroups { get; set; }
+    public virtual DbSet<MemberToCourse> MemberToCourses { get; set; }
 
     public virtual DbSet<Pricing> Pricings { get; set; }
 
     public virtual DbSet<ProductType> ProductTypes { get; set; }
 
     public virtual DbSet<Timing> Timings { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\Full-Stack-Project-2024\\ClayKef\\DAL\\Database.mdf;Integrated Security=True;Connect Timeout=30");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -52,30 +48,17 @@ public partial class ClayKefDB : DbContext
                 .HasColumnName("name");
         });
 
-        modelBuilder.Entity<Duration>(entity =>
+        modelBuilder.Entity<Course>(entity =>
         {
-            entity.HasKey(e => e.Code).HasName("PK__Duration__357D4CF8595DCC37");
+            entity.HasKey(e => e.Code).HasName("PK__Course__357D4CF8C17EA525");
 
-            entity.ToTable("Duration");
-
-            entity.Property(e => e.Code).HasColumnName("code");
-            entity.Property(e => e.Type)
-                .HasMaxLength(50)
-                .IsFixedLength()
-                .HasColumnName("type");
-        });
-
-        modelBuilder.Entity<Group>(entity =>
-        {
-            entity.HasKey(e => e.Code).HasName("PK__tmp_ms_x__357D4CF8D752BE34");
-
-            entity.ToTable("Group");
+            entity.ToTable("Course");
 
             entity.Property(e => e.Code).HasColumnName("code");
             entity.Property(e => e.AgeCode).HasColumnName("ageCode");
+            entity.Property(e => e.CourseLevelCode).HasColumnName("courseLevelCode");
             entity.Property(e => e.DurationCode).HasColumnName("durationCode");
-            entity.Property(e => e.GroupLevelCode).HasColumnName("groupLevelCode");
-            entity.Property(e => e.MemberToGroupCode).HasColumnName("memberToGroupCode");
+            entity.Property(e => e.MemberToCourseCode).HasColumnName("memberToCourseCode");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsFixedLength()
@@ -88,46 +71,59 @@ public partial class ClayKefDB : DbContext
             entity.Property(e => e.ProductTypeCode).HasColumnName("productTypeCode");
             entity.Property(e => e.TimingCode).HasColumnName("timingCode");
 
-            entity.HasOne(d => d.AgeCodeNavigation).WithMany(p => p.Groups)
+            entity.HasOne(d => d.AgeCodeNavigation).WithMany(p => p.Courses)
                 .HasForeignKey(d => d.AgeCode)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("groupToAge");
+                .HasConstraintName("courseToAge");
 
-            entity.HasOne(d => d.DurationCodeNavigation).WithMany(p => p.Groups)
+            entity.HasOne(d => d.CourseLevelCodeNavigation).WithMany(p => p.Courses)
+                .HasForeignKey(d => d.CourseLevelCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("courseToCourseLevel");
+
+            entity.HasOne(d => d.DurationCodeNavigation).WithMany(p => p.Courses)
                 .HasForeignKey(d => d.DurationCode)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("groupToDuration");
+                .HasConstraintName("courseToDuration");
 
-            entity.HasOne(d => d.GroupLevelCodeNavigation).WithMany(p => p.Groups)
-                .HasForeignKey(d => d.GroupLevelCode)
+            entity.HasOne(d => d.MemberToCourseCodeNavigation).WithMany(p => p.Courses)
+                .HasForeignKey(d => d.MemberToCourseCode)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("groupToGroupLevel");
+                .HasConstraintName("courseToMemberToCourse");
 
-            entity.HasOne(d => d.MemberToGroupCodeNavigation).WithMany(p => p.Groups)
-                .HasForeignKey(d => d.MemberToGroupCode)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("groupToMemberToGroup");
-
-            entity.HasOne(d => d.PricingCodeNavigation).WithMany(p => p.Groups)
+            entity.HasOne(d => d.PricingCodeNavigation).WithMany(p => p.Courses)
                 .HasForeignKey(d => d.PricingCode)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("groupToPricing");
+                .HasConstraintName("courseToPricing");
 
-            entity.HasOne(d => d.ProductTypeCodeNavigation).WithMany(p => p.Groups)
+            entity.HasOne(d => d.ProductTypeCodeNavigation).WithMany(p => p.Courses)
                 .HasForeignKey(d => d.ProductTypeCode)
-                .HasConstraintName("groupToProductType");
+                .HasConstraintName("courseToProductType");
 
-            entity.HasOne(d => d.TimingCodeNavigation).WithMany(p => p.Groups)
+            entity.HasOne(d => d.TimingCodeNavigation).WithMany(p => p.Courses)
                 .HasForeignKey(d => d.TimingCode)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("groupToTiming");
+                .HasConstraintName("courseToTiming");
         });
 
-        modelBuilder.Entity<GroupLevel>(entity =>
+        modelBuilder.Entity<CourseLevel>(entity =>
         {
-            entity.HasKey(e => e.Code).HasName("PK__tmp_ms_x__357D4CF8C35D0185");
+            entity.HasKey(e => e.Code).HasName("PK__CourseLe__357D4CF899E490E7");
 
-            entity.ToTable("GroupLevel");
+            entity.ToTable("CourseLevel");
+
+            entity.Property(e => e.Code).HasColumnName("code");
+            entity.Property(e => e.Type)
+                .HasMaxLength(50)
+                .IsFixedLength()
+                .HasColumnName("type");
+        });
+
+        modelBuilder.Entity<Duration>(entity =>
+        {
+            entity.HasKey(e => e.Code).HasName("PK__Duration__357D4CF8595DCC37");
+
+            entity.ToTable("Duration");
 
             entity.Property(e => e.Code).HasColumnName("code");
             entity.Property(e => e.Type)
@@ -159,23 +155,27 @@ public partial class ClayKefDB : DbContext
                 .HasMaxLength(50)
                 .IsFixedLength()
                 .HasColumnName("lastName");
-            entity.Property(e => e.MemberToGroupCode).HasColumnName("memberToGroupCode");
-            entity.Property(e => e.TOrP).HasColumnName("tOrP");
+            entity.Property(e => e.MemberToCourseCode).HasColumnName("memberToCourseCode");
+            entity.Property(e => e.Password)
+                .HasMaxLength(10)
+                .IsFixedLength()
+                .HasColumnName("password");
+            entity.Property(e => e.TOrF).HasColumnName("tOrF");
 
-            entity.HasOne(d => d.MemberToGroupCodeNavigation).WithMany(p => p.Members)
-                .HasForeignKey(d => d.MemberToGroupCode)
+            entity.HasOne(d => d.MemberToCourseCodeNavigation).WithMany(p => p.Members)
+                .HasForeignKey(d => d.MemberToCourseCode)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("memberToMemberToGroup");
+                .HasConstraintName("memberToMemberToCourse");
         });
 
-        modelBuilder.Entity<MemberToGroup>(entity =>
+        modelBuilder.Entity<MemberToCourse>(entity =>
         {
-            entity.HasKey(e => e.Code).HasName("PK__MemberTo__357D4CF8C6486A60");
+            entity.HasKey(e => e.Code).HasName("PK__MemberTo__357D4CF847B24547");
 
-            entity.ToTable("MemberToGroup");
+            entity.ToTable("MemberToCourse");
 
             entity.Property(e => e.Code).HasColumnName("code");
-            entity.Property(e => e.GroupCode).HasColumnName("groupCode");
+            entity.Property(e => e.CourseCode).HasColumnName("courseCode");
             entity.Property(e => e.MemberCode).HasColumnName("memberCode");
         });
 

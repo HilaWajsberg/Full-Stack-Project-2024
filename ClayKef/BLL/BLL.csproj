@@ -10,10 +10,4 @@
     <ProjectReference Include="..\DAL\DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BLLModels\" />
-    <Folder Include="BLLImplementation\" />
-    <Folder Include="BLLApi\" />
-  </ItemGroup>
-
 </Project>

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ClayKef.Models;
+namespace DAL.Models;
 
-public partial class GroupLevel
+public partial class Duration
 {
     public int Code { get; set; }
 
     public string Type { get; set; } = null!;
 
-    public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
+    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 }
