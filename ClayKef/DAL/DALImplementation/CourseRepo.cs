@@ -21,7 +21,7 @@ namespace DAL.DALImplementation
 
         public async Task<List<Course>> GetAll()
         {
-            return await _context.Courses.ToListAsync();
+            return await _context.Courses.Include(c=>c.AgeCode).Include(c=> c.CourseLevelCode).Include(c=> c.PricingCode).Include(c=> c.TimingCode).ToListAsync();
         }
     }
 }

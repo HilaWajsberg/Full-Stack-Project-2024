@@ -1,5 +1,7 @@
-﻿using DAL.DALImplementation;
+﻿using DAL.DALApi;
+using DAL.DALImplementation;
 using DAL.Models;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,13 @@ namespace DAL
 {
     public class DalManger
     {
-        public CourseRepo Courses { get; set; }
+        public CourseRepo Courses { get; }
         public DalManger() {
-            ClayKefContext database = new ClayKefContext();
-            Courses =new CourseRepo(database);
+/*            ClayKefContext database = new ClayKefContext();*/
+/*            Courses =new CourseRepo(database);*/
+            ServiceCollection services = new ServiceCollection();
+            services.AddScoped<ICourseRepo, CourseRepo>();
+            ServiceProvider servicesProvider = services.BuildServiceProvider();
         }
     }
 }
