@@ -9,6 +9,6 @@ namespace BLL.BLLApi
 {
     public interface IUICourseRepo
     {
-        public List<Task<UICourse>> GetCourses();
+        Task<List<UICourse>> GetCourses();
     }
 }

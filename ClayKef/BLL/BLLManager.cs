@@ -1,4 +1,5 @@
-﻿using BLL.BLLImplementation;
+﻿using BLL.BLLApi;
+using BLL.BLLImplementation;
 using DAL;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,9 +18,10 @@ namespace BLL
         {
             ServiceCollection services = new();
             services.AddScoped<DalManger>();
-            services.AddScoped<UICourseRepo>();
+            services.AddScoped<IUICourseRepo, UICourseRepo>();
             ServiceProvider servicesProvider = services.BuildServiceProvider();
             uicourseRepo = servicesProvider.GetService<UICourseRepo>();
+
         }
     }
 }

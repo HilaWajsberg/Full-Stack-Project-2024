@@ -1,28 +1,25 @@
 ﻿using BLL.BLLApi;
 using BLL.BLLModels;
 using DAL;
+using DAL.DALApi;
 using DAL.DALImplementation;
 using DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.BLLImplementation
 {
     public class UICourseRepo : IUICourseRepo
     {
-        CourseRepo courseRepo;
-        public UICourseRepo(DalManger dalManger)
+        ICourseRepo courseRepo;
+        public UICourseRepo(ICourseRepo c)
         {
-            this.courseRepo = dalManger.Courses;
-           
+            this.courseRepo = c;
         }
-        public List<Task<UICourse>> GetCourses()
+        public async Task<List<UICourse>> GetCourses()
         {
             Task<List<Course>> courseTask = courseRepo.GetAll();
-            List<UICourse> CourseList = new List<UICourse>();
+            /*   List < UICourse>CourseList = new List<UICourse>();*/
+            var CourseList = new List<UICourse>();
+            /*var CourseList = await courseTask; */
             foreach (Course course in courseTask.Result)
             {
                 UICourse newCourse = new();
@@ -33,8 +30,10 @@ namespace BLL.BLLImplementation
                 newCourse.Day = course.TimingCodeNavigation.Day;
                 newCourse.Hour = (float)course.TimingCodeNavigation.Hour;
                 newCourse.NumOfMembers = course.NumOfMembers;
+                CourseList/*.Result*/.Add(newCourse);
             }
-            throw new Exception();
+            /*CourseList = GetListAsync(CourseList).Result;*/
+            return /*await*/ CourseList;
         }
     }
 }
