@@ -7,19 +7,19 @@ public partial class Member
 {
     public int Code { get; set; }
 
-    public string FirstName { get; set; } = null!;
+    public string FirstName { get; set; }
 
-    public string LastName { get; set; } = null!;
+    public string LastName { get; set; }
 
-    public string CellPhone { get; set; } = null!;
+    public string CellPhone { get; set; }
 
-    public string Email { get; set; } = null!;
+    public string Email { get; set; }
 
     public int MemberToCourseCode { get; set; }
 
     public int TOrF { get; set; }
 
-    public string Password { get; set; } = null!;
+    public int UserCode { get; set; }
 
-    public virtual MemberToCourse MemberToCourseCodeNavigation { get; set; } = null!;
+    public virtual MemberToCourse MemberToCourseCodeNavigation { get; set; }
 }

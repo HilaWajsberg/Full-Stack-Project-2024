@@ -7,7 +7,7 @@ public partial class Course
 {
     public int Code { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string Name { get; set; }
 
     public DateTime OpeningDate { get; set; }
 
@@ -27,17 +27,17 @@ public partial class Course
 
     public int MemberToCourseCode { get; set; }
 
-    public virtual Age AgeCodeNavigation { get; set; } = null!;
+    public virtual Age AgeCodeNavigation { get; set; }
 
-    public virtual CourseLevel CourseLevelCodeNavigation { get; set; } = null!;
+    public virtual CourseLevel CourseLevelCodeNavigation { get; set; }
 
-    public virtual Duration DurationCodeNavigation { get; set; } = null!;
+    public virtual Duration DurationCodeNavigation { get; set; }
 
-    public virtual MemberToCourse MemberToCourseCodeNavigation { get; set; } = null!;
+    public virtual MemberToCourse MemberToCourseCodeNavigation { get; set; }
 
-    public virtual Pricing PricingCodeNavigation { get; set; } = null!;
+    public virtual Pricing PricingCodeNavigation { get; set; }
 
-    public virtual ProductType? ProductTypeCodeNavigation { get; set; }
+    public virtual ProductType ProductTypeCodeNavigation { get; set; }
 
-    public virtual Timing TimingCodeNavigation { get; set; } = null!;
+    public virtual Timing TimingCodeNavigation { get; set; }
 }

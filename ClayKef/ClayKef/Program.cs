@@ -14,7 +14,9 @@ builder.Services.AddDbContext<ClayKefContext>(opt => opt.UseSqlServer(connString
 builder.Services.AddScoped<ICourseRepo, CourseRepo>();
 */
 builder.Services.AddControllers();
-builder.Services.AddServices();
+DBActions actions = new DBActions(builder.Configuration);
+var connString = actions.GetConnectionString("ClayKefDB");
+builder.Services.AddServices(connString );
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
 var app = builder.Build();

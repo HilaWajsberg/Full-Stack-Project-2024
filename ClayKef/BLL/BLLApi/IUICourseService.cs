@@ -9,7 +9,7 @@ namespace BLL.BLLApi
 {
     public interface IUICourseService
     {
-        //Task<List<UICourse>> GetCourses();
-        string GetCourses();
+        /*Task<*/List<UICourse>/*>*/ GetCourses();
+        //string GetCourses();
     }
 }

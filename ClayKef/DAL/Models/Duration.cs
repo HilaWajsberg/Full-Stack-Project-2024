@@ -7,7 +7,7 @@ public partial class Duration
 {
     public int Code { get; set; }
 
-    public string Type { get; set; } = null!;
+    public string Type { get; set; }
 
     public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 }

@@ -1,6 +1,7 @@
 ﻿using BLL.BLLApi;
 using BLL.BLLImplementation;
 using DAL;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,15 +15,17 @@ namespace BLL
 
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddServices(this IServiceCollection collection)
-        {
-            collection.AddSingleton<IUICourseService, UICourseService>();
+        public static IServiceCollection AddServices(this IServiceCollection collection,string config)
+        { 
+            collection.AddRepositories(config);
+
+            collection.AddScoped <IUICourseService, UICourseService>();
            
            /* collection.AddAutoMapper(typeof(PassengerProfile), typeof(FlightProfile),
                 typeof(PersonalDetailsProfile), typeof(PassengerWithFlightProfile));*/
 
             //collection.AddRepositories(config);
-            collection.AddRepositories();
+           
             return collection;
         }
     }

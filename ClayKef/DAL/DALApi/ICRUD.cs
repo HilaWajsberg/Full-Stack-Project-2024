@@ -8,7 +8,7 @@ namespace DAL.DALApi
 {
     public interface ICRUD<T>
     {
-        //Task<List<T>> GetAll();
-        string GetAll();
+        /*Task<*/List<T>/*>*/ GetAll();
+        //string GetAll();
     }
 }

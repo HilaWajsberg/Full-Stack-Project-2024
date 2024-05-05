@@ -1,6 +1,11 @@
 ﻿using DAL.DALApi;
 using DAL.DALImplementation;
+using DAL.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +16,12 @@ namespace DAL
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddRepositories(this IServiceCollection collection)
+        public static void AddRepositories(this IServiceCollection collection, string config)
         {
-            //collection.AddSingleton<IDataContext, DataContext>();
-            collection.AddSingleton<ICourseRepo, CourseRepo>();
+           collection.AddDbContext<DBContext>(opt => opt.UseSqlServer(config));
+            collection.AddDbContext<DBContext>();
+
+            collection.AddScoped<ICourseRepo, CourseRepo>();
             
 
         }

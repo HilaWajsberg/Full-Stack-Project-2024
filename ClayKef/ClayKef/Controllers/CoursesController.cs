@@ -21,14 +21,15 @@ namespace ClayKef.Controlleers
         }
         
         [HttpGet]
-        /* public async Task<ActionResult<List<UICourse>>> GetAllCourses(){
-             return await coursesService.GetCourses();
-         }*/
-
-        public string GetAllCourses()
-        {
+         public async Task<ActionResult<List<UICourse>>> GetAllCourses(){
+             /*var x=  coursesService.GetCourses();*/
             return coursesService.GetCourses();
-        }
+         }
+
+        //public string GetAllCourses()
+        //{
+        //    return coursesService.GetCourses();
+        //}
 
     }
 }

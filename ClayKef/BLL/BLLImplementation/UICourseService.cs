@@ -14,13 +14,13 @@ namespace BLL.BLLImplementation
         {
             this.courseRepo = course;
         }
-        /*public async Task<List<UICourse>> GetCourses()
+       public /*Task<*/List<UICourse>/*>*/ GetCourses()
         {
-            Task<List<Course>> courseTask = courseRepo.GetAll();
-            *//*   List < UICourse>CourseList = new List<UICourse>();*//*
+            List<Course> courseTask = courseRepo.GetAll()/*.Result*/ ;
+            //*   List < UICourse>CourseList = new List<UICourse>();*//*
             var CourseList = new List<UICourse>();
-            *//*var CourseList = await courseTask; *//*
-            foreach (Course course in courseTask.Result)
+            //*var CourseList = await courseTask; *//*
+            foreach (Course course in courseTask)
             {
                 UICourse newCourse = new();
                 newCourse.Name = course.Name;
@@ -30,16 +30,16 @@ namespace BLL.BLLImplementation
                 newCourse.Day = course.TimingCodeNavigation.Day;
                 newCourse.Hour = (float)course.TimingCodeNavigation.Hour;
                 newCourse.NumOfMembers = course.NumOfMembers;
-                CourseList*//*.Result*//*.Add(newCourse);
+                CourseList.Add(newCourse);
             }
-            *//*CourseList = GetListAsync(CourseList).Result;*//*
-            return *//*await*//* CourseList;
-        }*/
-
-
-        public string GetCourses()
-        {
-            return courseRepo.GetAll();
+            //*CourseList = GetListAsync(CourseList).Result;*//*
+            return  CourseList;
         }
+
+
+        //public string GetCourses()
+        //{
+        //    return courseRepo.GetAll();
+        //}
     }
 }
