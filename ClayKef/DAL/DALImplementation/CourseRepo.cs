@@ -12,16 +12,19 @@ namespace DAL.DALImplementation
 {
     public class CourseRepo : ICourseRepo
     {
-        ClayKefContext _context;
+       /* ClayKefContext _context;
 
         public CourseRepo(ClayKefContext context)
         {
             _context = context;
+        }*/
+
+        public /*async*/ /*Task<List<Course>>*/ string GetAll()
+        {
+            // return await _context.Courses.Include(c=>c.AgeCode).Include(c=> c.CourseLevelCode).Include(c=> c.PricingCode).Include(c=> c.TimingCode).ToListAsync();
+            return "I am in get all";
         }
 
-        public async Task<List<Course>> GetAll()
-        {
-            return await _context.Courses.Include(c=>c.AgeCode).Include(c=> c.CourseLevelCode).Include(c=> c.PricingCode).Include(c=> c.TimingCode).ToListAsync();
-        }
+
     }
 }

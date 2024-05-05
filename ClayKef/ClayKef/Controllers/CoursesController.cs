@@ -13,17 +13,22 @@ namespace ClayKef.Controlleers
     public class CoursesController : ControllerBase
     {
       
-        IUICourseRepo CoursesRepo;
+        IUICourseService coursesService;
 
-        public CoursesController(BLLManager bllManager)
+        public CoursesController(IUICourseService coursesService)
         {
-            CoursesRepo = bllManager.uicourseRepo;
+            this.coursesService = coursesService;
         }
         
         [HttpGet]
-        public async Task<ActionResult<List<UICourse>>> GetAllCourses(){
-            return await CoursesRepo.GetCourses();
+        /* public async Task<ActionResult<List<UICourse>>> GetAllCourses(){
+             return await coursesService.GetCourses();
+         }*/
+
+        public string GetAllCourses()
+        {
+            return coursesService.GetCourses();
         }
-  
+
     }
 }

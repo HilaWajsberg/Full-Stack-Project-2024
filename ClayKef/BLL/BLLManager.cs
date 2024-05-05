@@ -12,15 +12,15 @@ namespace BLL
 {
     public class BLLManager
     {
-        public UICourseRepo uicourseRepo { get; }
+        public UICourseService uicourseRepo { get; }
 
         public BLLManager()
         {
             ServiceCollection services = new();
             services.AddScoped<DalManger>();
-            services.AddScoped<IUICourseRepo, UICourseRepo>();
+            services.AddScoped<IUICourseService, UICourseService>();
             ServiceProvider servicesProvider = services.BuildServiceProvider();
-            uicourseRepo = servicesProvider.GetService<UICourseRepo>();
+            uicourseRepo = servicesProvider.GetService<UICourseService>();
 
         }
     }
