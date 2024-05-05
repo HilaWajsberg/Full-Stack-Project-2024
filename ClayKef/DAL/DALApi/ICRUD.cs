@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,11 @@ namespace DAL.DALApi
 {
     public interface ICRUD<T>
     {
-        /*Task<*/List<T>/*>*/ GetAll();
-        //string GetAll();
+        List<T> GetAll(/*BaseQueryParams queryParams*/);
+        List<T> Get(BaseQueryParams queryParams);
+        T Post(T entity);
+        T Delete(int id);
+        T Put(T entity);  
+        
     }
 }

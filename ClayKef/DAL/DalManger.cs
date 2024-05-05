@@ -14,8 +14,6 @@ namespace DAL
     {
         public CourseRepo Courses { get; }
         public DalManger() {
-/*            ClayKefContext database = new ClayKefContext();*/
-/*            Courses =new CourseRepo(database);*/
             ServiceCollection services = new ServiceCollection();
             services.AddScoped<ICourseRepo, CourseRepo>();
             ServiceProvider servicesProvider = services.BuildServiceProvider();

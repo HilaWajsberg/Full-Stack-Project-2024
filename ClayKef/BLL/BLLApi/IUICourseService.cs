@@ -1,4 +1,5 @@
 ﻿using BLL.BLLModels;
+using Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace BLL.BLLApi
 {
     public interface IUICourseService
     {
-        /*Task<*/List<UICourse>/*>*/ GetCourses();
-        //string GetCourses();
+        List<UICourse> GetCourses(/*BaseQueryParams queryParams*/);
+        List<UICourse> GetFilteredCourses(BaseQueryParams queryParams);
     }
 }

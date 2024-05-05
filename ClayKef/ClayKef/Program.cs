@@ -16,11 +16,13 @@ builder.Services.AddScoped<ICourseRepo, CourseRepo>();
 builder.Services.AddControllers();
 DBActions actions = new DBActions(builder.Configuration);
 var connString = actions.GetConnectionString("ClayKefDB");
-builder.Services.AddServices(connString );
+builder.Services.AddServices(connString);
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
+/*builder.Services.AddSwaggerGen();*/
 var app = builder.Build();
+/*app.UseSwagger();
+app.UseSwaggerUI();*/
 app.MapControllers();
 app.MapGet("/", () => "Hello World!");
-
 app.Run();

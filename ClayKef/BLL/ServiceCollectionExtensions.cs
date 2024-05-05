@@ -20,12 +20,7 @@ namespace BLL
             collection.AddRepositories(config);
 
             collection.AddScoped <IUICourseService, UICourseService>();
-           
-           /* collection.AddAutoMapper(typeof(PassengerProfile), typeof(FlightProfile),
-                typeof(PersonalDetailsProfile), typeof(PassengerWithFlightProfile));*/
-
-            //collection.AddRepositories(config);
-           
+                      
             return collection;
         }
     }

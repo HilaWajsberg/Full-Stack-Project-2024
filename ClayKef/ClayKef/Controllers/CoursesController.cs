@@ -1,6 +1,7 @@
 ﻿using BLL;
 using BLL.BLLApi;
 using BLL.BLLModels;
+using Common;
 using DAL.DALApi;
 using DAL.Models;
 using Microsoft.AspNetCore.Http;
@@ -20,16 +21,14 @@ namespace ClayKef.Controlleers
             this.coursesService = coursesService;
         }
         
+       /* [HttpGet]
+         public async Task<ActionResult<List<UICourse>>> GetAllCourses(*//*BaseQueryParams queryParams*//*){
+            return coursesService.GetCourses(*//*queryParams*//*);
+         }*/
         [HttpGet]
-         public async Task<ActionResult<List<UICourse>>> GetAllCourses(){
-             /*var x=  coursesService.GetCourses();*/
-            return coursesService.GetCourses();
-         }
-
-        //public string GetAllCourses()
-        //{
-        //    return coursesService.GetCourses();
-        //}
-
+        public async Task<ActionResult<List<UICourse>>> GetCourses([FromQuery]CoursesParams queryParams)
+        {
+            return coursesService.GetFilteredCourses(queryParams);
+        }
     }
 }

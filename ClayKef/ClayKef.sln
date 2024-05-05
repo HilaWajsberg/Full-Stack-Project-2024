@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClayKef", "ClayKef\ClayKef.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{C7F8D7E4-8AEC-4F05-AEE9-774E7D127A4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{760769F6-A0A9-4092-937E-82607F5B0AC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{760769F6-A0A9-4092-937E-82607F5B0AC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{C0A1C59D-1F69-434F-B53A-DF160F98F168}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{760769F6-A0A9-4092-937E-82607F5B0AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{760769F6-A0A9-4092-937E-82607F5B0AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{760769F6-A0A9-4092-937E-82607F5B0AC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0A1C59D-1F69-434F-B53A-DF160F98F168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0A1C59D-1F69-434F-B53A-DF160F98F168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0A1C59D-1F69-434F-B53A-DF160F98F168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0A1C59D-1F69-434F-B53A-DF160F98F168}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

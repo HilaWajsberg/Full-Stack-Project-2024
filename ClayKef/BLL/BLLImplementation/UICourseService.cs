@@ -1,5 +1,6 @@
 ﻿using BLL.BLLApi;
 using BLL.BLLModels;
+using Common;
 using DAL;
 using DAL.DALApi;
 using DAL.DALImplementation;
@@ -14,12 +15,10 @@ namespace BLL.BLLImplementation
         {
             this.courseRepo = course;
         }
-       public /*Task<*/List<UICourse>/*>*/ GetCourses()
+       public List<UICourse>GetCourses(/*BaseQueryParams queryParams*/)
         {
-            List<Course> courseTask = courseRepo.GetAll()/*.Result*/ ;
-            //*   List < UICourse>CourseList = new List<UICourse>();*//*
+            List<Course> courseTask = courseRepo.GetAll(/*queryParams*/) ;
             var CourseList = new List<UICourse>();
-            //*var CourseList = await courseTask; *//*
             foreach (Course course in courseTask)
             {
                 UICourse newCourse = new();
@@ -32,14 +31,27 @@ namespace BLL.BLLImplementation
                 newCourse.NumOfMembers = course.NumOfMembers;
                 CourseList.Add(newCourse);
             }
-            //*CourseList = GetListAsync(CourseList).Result;*//*
             return  CourseList;
         }
 
-
-        //public string GetCourses()
-        //{
-        //    return courseRepo.GetAll();
-        //}
+        public List<UICourse> GetFilteredCourses(BaseQueryParams queryParams)
+        {
+            List<Course> courseTask = courseRepo.Get(queryParams);
+            var CourseList = new List<UICourse>();
+            foreach (Course course in courseTask)
+            {
+                UICourse newCourse = new();
+                newCourse.Name = course.Name;
+                newCourse.Ageing = course.AgeCodeNavigation.Name;
+                newCourse.Level = course.CourseLevelCodeNavigation.Type;
+                newCourse.Price = course.PricingCodeNavigation.Price;
+                newCourse.Day = course.TimingCodeNavigation.Day;
+                newCourse.Hour = (float)course.TimingCodeNavigation.Hour;
+                newCourse.NumOfMembers = course.NumOfMembers;
+                CourseList.Add(newCourse);
+            }
+            return CourseList;
+        }
     }
-}
+    }
+
