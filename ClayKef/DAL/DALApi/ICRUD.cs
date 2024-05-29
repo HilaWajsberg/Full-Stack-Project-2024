@@ -9,7 +9,7 @@ namespace DAL.DALApi
 {
     public interface ICRUD<T>
     {
-        List<T> GetAll(/*BaseQueryParams queryParams*/);
+        List<T> GetAll(BaseQueryParams queryParams);
         List<T> Get(BaseQueryParams queryParams);
         T Post(T entity);
         T Delete(int id);

@@ -10,7 +10,7 @@ namespace BLL.BLLApi
 {
     public interface IUICourseService
     {
-        List<UICourse> GetCourses(/*BaseQueryParams queryParams*/);
+        //List<UICourse> GetCourses(BaseQueryParams queryParams);
         List<UICourse> GetFilteredCourses(BaseQueryParams queryParams);
     }
 }

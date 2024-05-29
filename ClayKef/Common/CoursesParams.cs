@@ -10,8 +10,10 @@ namespace Common
     {
         public int CourseCode { get; set; }
         public string? Name { get; set; }
-        public int AgeCode { get; set; }
-        public int LevelCode { get; set; }
-        public int TimeingCode { get; set; }
+        public string? Age { get; set; }
+        public string? Level { get; set; }
+        public int Day { get; set; }
+        public double Hour { get; set; }
+        public double Price { get; set; }
     }
 }

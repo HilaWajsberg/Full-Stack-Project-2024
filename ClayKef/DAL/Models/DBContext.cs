@@ -43,7 +43,6 @@ public partial class DBContext : DbContext
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(20)
-                .IsFixedLength()
                 .HasColumnName("name");
         });
 
@@ -57,7 +56,6 @@ public partial class DBContext : DbContext
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(20)
-                .IsFixedLength()
                 .HasColumnName("name");
         });
 
@@ -75,7 +73,6 @@ public partial class DBContext : DbContext
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(50)
-                .IsFixedLength()
                 .HasColumnName("name");
             entity.Property(e => e.NumOfMembers).HasColumnName("numOfMembers");
             entity.Property(e => e.OpeningDate)
@@ -130,7 +127,6 @@ public partial class DBContext : DbContext
             entity.Property(e => e.Type)
                 .IsRequired()
                 .HasMaxLength(50)
-                .IsFixedLength()
                 .HasColumnName("type");
         });
 
@@ -144,7 +140,6 @@ public partial class DBContext : DbContext
             entity.Property(e => e.Type)
                 .IsRequired()
                 .HasMaxLength(50)
-                .IsFixedLength()
                 .HasColumnName("type");
         });
 
@@ -158,22 +153,18 @@ public partial class DBContext : DbContext
             entity.Property(e => e.CellPhone)
                 .IsRequired()
                 .HasMaxLength(10)
-                .IsFixedLength()
                 .HasColumnName("cellPhone");
             entity.Property(e => e.Email)
                 .IsRequired()
                 .HasMaxLength(100)
-                .IsFixedLength()
                 .HasColumnName("email");
             entity.Property(e => e.FirstName)
                 .IsRequired()
                 .HasMaxLength(50)
-                .IsFixedLength()
                 .HasColumnName("firstName");
             entity.Property(e => e.LastName)
                 .IsRequired()
                 .HasMaxLength(50)
-                .IsFixedLength()
                 .HasColumnName("lastName");
             entity.Property(e => e.MemberToCourseCode).HasColumnName("memberToCourseCode");
             entity.Property(e => e.TOrF).HasColumnName("tOrF");
@@ -216,13 +207,11 @@ public partial class DBContext : DbContext
             entity.Property(e => e.PricingCode).HasColumnName("pricingCode");
             entity.Property(e => e.Technique)
                 .IsRequired()
-                .HasMaxLength(100)
-                .IsFixedLength()
+                .HasMaxLength(50)
                 .HasColumnName("technique");
             entity.Property(e => e.Type)
                 .IsRequired()
                 .HasMaxLength(50)
-                .IsFixedLength()
                 .HasColumnName("type");
 
             entity.HasOne(d => d.PricingCodeNavigation).WithMany(p => p.ProductTypes)
@@ -256,12 +245,10 @@ public partial class DBContext : DbContext
             entity.Property(e => e.Password)
                 .IsRequired()
                 .HasMaxLength(50)
-                .IsFixedLength()
                 .HasColumnName("password");
             entity.Property(e => e.UserName)
                 .IsRequired()
                 .HasMaxLength(50)
-                .IsFixedLength()
                 .HasColumnName("userName");
         });
 

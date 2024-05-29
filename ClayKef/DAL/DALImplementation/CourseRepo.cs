@@ -34,7 +34,7 @@ namespace DAL.DALImplementation
             }
             /*var queryable = Context.Universities.AsQueryable();*/
             var queryable = _context.Courses.AsQueryable();
-            if ( courseParams.CourseCode > 0)
+        /*    if ( courseParams.CourseCode > 0)
             {
                 queryable = queryable.Where(c => c.Code == courseParams.CourseCode);
             }
@@ -53,7 +53,7 @@ namespace DAL.DALImplementation
             if (courseParams.TimeingCode > 0)
             {
                 queryable = queryable.Where(c => c.TimingCode == courseParams.TimeingCode);
-            }
+            }*/
             return queryable.Include(c => c.AgeCodeNavigation).Include(c => c.CourseLevelCodeNavigation).Include(c => c.PricingCodeNavigation).Include(c => c.TimingCodeNavigation).ToList();
             /*PagedList<University>
             .ToPagedListAsync(queryable.OrderBy(u => u.UniversityName),
@@ -62,7 +62,7 @@ namespace DAL.DALImplementation
             /*  throw new NotImplementedException();*/
         }
 
-        public List<Course> GetAll(/*BaseQueryParams queryParams*/)
+        public List<Course> GetAll(BaseQueryParams queryParams)
         {
             return _context.Courses.Include(c => c.AgeCodeNavigation).Include(c => c.CourseLevelCodeNavigation).Include(c => c.PricingCodeNavigation).Include(c => c.TimingCodeNavigation).ToList(); 
             
