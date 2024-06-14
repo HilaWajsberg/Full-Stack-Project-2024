@@ -13,11 +13,28 @@ namespace BLL.BLLImplementation
     public class UICourseService : IUICourseService
     {
         ICourseRepo courseRepo;
-        public UICourseService(ICourseRepo course)
+        IUIMemberToCourseService memberToCourseService;
+        public UICourseService(ICourseRepo course, IUIMemberToCourseService memberToCourseService)
         {
-            this.courseRepo = course;
+            courseRepo = course;
+            this.memberToCourseService = memberToCourseService;
         }
-       public List<UICourse> GetFilteredCourses(BaseQueryParams queryParams)
+
+        public async Task<UICourse> GetCourseById(int id)
+        {
+                Task<Course> course = courseRepo.Get(id);
+                UICourse newCourse = new();
+                newCourse.Name = course.Result.Name;
+                newCourse.Ageing = course.Result.AgeCodeNavigation.Name;
+                newCourse.Level = course.Result.CourseLevelCodeNavigation.Type;
+                newCourse.Price = course.Result.PricingCodeNavigation.Price;
+                newCourse.Day = course.Result.TimingCodeNavigation.Day;
+                newCourse.Hour = (float)course.Result.TimingCodeNavigation.Hour;
+                newCourse.NumOfMembers = course.Result.NumOfMembers;
+                return newCourse;  
+        }
+
+        public List<UICourse> GetFilteredCourses(BaseQueryParams queryParams)
         {
             var courseParams = queryParams as CoursesParams;
             List<Course> courseTask = courseRepo.GetAll(queryParams) ;
@@ -32,7 +49,17 @@ namespace BLL.BLLImplementation
                 newCourse.Day = course.TimingCodeNavigation.Day;
                 newCourse.Hour = (float)course.TimingCodeNavigation.Hour;
                 newCourse.NumOfMembers = course.NumOfMembers;
+                if (1 == 5)
+                {
+                    newCourse.Members = null;
+                }
+                else
+                {
+                    newCourse.Members = memberToCourseService.GetMembersByCourse(course.Code).Result;
+
+                }
                 CourseList.Add(newCourse);
+                
             }
             var queryable = CourseList.AsQueryable();
             if (courseParams.Price > 0)
@@ -59,28 +86,52 @@ namespace BLL.BLLImplementation
             {
                 queryable = queryable.Where(c => c.Hour == courseParams.Hour);
             }
+           /* if (1 == 1)
+            {
 
+            }
+            else { }*/
             return  queryable.ToList();
         }
 
-/*        public List<UICourse> GetFilteredCourses(BaseQueryParams queryParams)
+        public async Task<UICourse> RemoveCourse(int id)
         {
-            List<Course> courseTask = courseRepo.Get(queryParams);
-            var CourseList = new List<UICourse>();
-            foreach (Course course in courseTask)
+            Task<Course> course = courseRepo.Delete(id);
+            UICourse newCourse = new UICourse();
+            newCourse.Code = course.Result.Code;
+            newCourse.Name = course.Result.Name;
+            newCourse.Ageing = course.Result.AgeCodeNavigation.Name;
+            newCourse.Level = course.Result.CourseLevelCodeNavigation.Type;
+            newCourse.Price = course.Result.PricingCodeNavigation.Price;
+            newCourse.Day = course.Result.TimingCodeNavigation.Day;
+            newCourse.Hour = (float)course.Result.TimingCodeNavigation.Hour;
+            newCourse.NumOfMembers = course.Result.NumOfMembers;
+           /* foreach(MemberToCourse memberTo in course.Result.MemberToCourseCodeNavigation.MemberCode)
             {
-                UICourse newCourse = new();
-                newCourse.Name = course.Name;
-                newCourse.Ageing = course.AgeCodeNavigation.Name;
-                newCourse.Level = course.CourseLevelCodeNavigation.Type;
-                newCourse.Price = cour se.PricingCodeNavigation.Price;
-                newCourse.Day = course.TimingCodeNavigation.Day;
-                newCourse.Hour = (float)course.TimingCodeNavigation.Hour;
-                newCourse.NumOfMembers = course.NumOfMembers;
-                CourseList.Add(newCourse);
-            }
-            return CourseList;
-        }*/
+                
+            }*/
+
+            return newCourse;
+        }
+
+        /*        public List<UICourse> GetFilteredCourses(BaseQueryParams queryParams)
+                {
+                    List<Course> courseTask = courseRepo.Get(queryParams);
+                    var CourseList = new List<UICourse>();
+                    foreach (Course course in courseTask)
+                    {
+                        UICourse newCourse = new();
+                        newCourse.Name = course.Name;
+                        newCourse.Ageing = course.AgeCodeNavigation.Name;
+                        newCourse.Level = course.CourseLevelCodeNavigation.Type;
+                        newCourse.Price = cour se.PricingCodeNavigation.Price;
+                        newCourse.Day = course.TimingCodeNavigation.Day;
+                        newCourse.Hour = (float)course.TimingCodeNavigation.Hour;
+                        newCourse.NumOfMembers = course.NumOfMembers;
+                        CourseList.Add(newCourse);
+                    }
+                    return CourseList;
+                }*/
     }
 }
 

@@ -12,5 +12,7 @@ namespace BLL.BLLApi
     {
         //List<UICourse> GetCourses(BaseQueryParams queryParams);
         List<UICourse> GetFilteredCourses(BaseQueryParams queryParams);
+        Task<UICourse> GetCourseById(int id);
+        Task<UICourse> RemoveCourse(int id);
     }
 }

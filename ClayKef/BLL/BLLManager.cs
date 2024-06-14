@@ -19,6 +19,8 @@ namespace BLL
             ServiceCollection services = new();
             services.AddScoped<DalManger>();
             services.AddScoped<IUICourseService, UICourseService>();
+            services.AddScoped<IUIMemberService, UIMemberService>();
+            services.AddScoped<IUIMemberToCourseService, UIMemberToCourseService>();
             ServiceProvider servicesProvider = services.BuildServiceProvider();
             uicourseRepo = servicesProvider.GetService<UICourseService>();
 

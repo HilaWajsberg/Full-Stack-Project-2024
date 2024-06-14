@@ -22,7 +22,9 @@ namespace DAL
             collection.AddDbContext<DBContext>();
 
             collection.AddScoped<ICourseRepo, CourseRepo>();
-            
+            collection.AddScoped<IMembersToCoursesRepo, MemberToCourseRepo>();
+            collection.AddScoped<IMemberRepo, MemberRepo>();
+
 
         }
     }

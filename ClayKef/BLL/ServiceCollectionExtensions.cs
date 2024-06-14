@@ -19,8 +19,9 @@ namespace BLL
         { 
             collection.AddRepositories(config);
 
-            collection.AddScoped <IUICourseService, UICourseService>();
-                      
+            collection.AddScoped<IUICourseService, UICourseService>();
+            collection.AddScoped<IUIMemberService, UIMemberService>();
+            collection.AddScoped<IUIMemberToCourseService, UIMemberToCourseService>();
             return collection;
         }
     }

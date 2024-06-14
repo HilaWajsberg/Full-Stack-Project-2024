@@ -10,9 +10,9 @@ namespace DAL.DALApi
     public interface ICRUD<T>
     {
         List<T> GetAll(BaseQueryParams queryParams);
-        List<T> Get(BaseQueryParams queryParams);
+        Task<T> Get(int id);
         T Post(T entity);
-        T Delete(int id);
+        Task<T> Delete(int id);
         T Put(T entity);  
         
     }

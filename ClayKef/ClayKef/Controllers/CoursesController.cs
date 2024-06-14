@@ -30,5 +30,10 @@ namespace ClayKef.Controlleers
         {
             return coursesService.GetFilteredCourses(queryParams);
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UICourse>> GetById(int id)
+        {
+            return await coursesService.GetCourseById(id);
+        }
     }
 }
