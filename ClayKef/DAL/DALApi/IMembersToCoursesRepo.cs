@@ -10,5 +10,6 @@ namespace DAL.DALApi
     public interface IMembersToCoursesRepo: ICRUD<int>
     {
         List<MemberToCourse> GetByCourse(int id);
+        List<MemberToCourse> GetByMember(int id);
     }
 }
