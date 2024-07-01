@@ -110,6 +110,7 @@ namespace BLL.BLLImplementation
              {
 
              }*/
+            memberToCourseService.RemoveMembersCourse(id);
             courseRepo.Delete(id);
             return newCourse;
         }

@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace DAL.DALApi
 {
-    public interface IMembersToCoursesRepo: ICRUD<int>
+    public interface IMembersToCoursesRepo
     {
         List<MemberToCourse> GetByCourse(int id);
         List<MemberToCourse> GetByMember(int id);
+        List<MemberToCourse> DeleteByCourse(int code);
     }
 }

@@ -33,22 +33,27 @@ namespace BLL.BLLImplementation
             }
             return membersList;
         }
-/*        public async Task<List<UICourse>> GetCourseByMember(int id)
-        {
-            List<MemberToCourse> courseMemberTask = memberCourseRepo.GetByMember(id);
-            var coursesList = new List<UICourse>();
-            foreach (MemberToCourse mc in courseMemberTask)
-            {
-                coursesList.Add(courseService.GetCourseById(mc.CourseCode).Result);
-            }
-            return coursesList;
-        }*/
 
-        void RemoveMembersCourse(int code)
+        public void RemoveMembersCourse(int code)
         {
-           memberCourseRepo.DeleteByCourse(code);
-            
+            memberCourseRepo.DeleteByCourse(code);
         }
+        /*        public async Task<List<UICourse>> GetCourseByMember(int id)
+       {
+           List<MemberToCourse> courseMemberTask = memberCourseRepo.GetByMember(id);
+           var coursesList = new List<UICourse>();
+           foreach (MemberToCourse mc in courseMemberTask)
+           {
+               coursesList.Add(courseService.GetCourseById(mc.CourseCode).Result);
+           }
+           return coursesList;
+       }*/
+
+        /*        void RemoveMembersCourse(int code)
+                {
+                   memberCourseRepo.DeleteByCourse(code);
+
+                }*/
     }
 }
 
