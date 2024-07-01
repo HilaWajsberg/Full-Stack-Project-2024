@@ -15,8 +15,8 @@ namespace BLL.BLLModels
         public string Phone { get; set; }
         public string Email { get; set; }
         public int TempOrPerm { get; set; }
-        public List<Course> Courses { get; set; }
-        public UIMember(int code, string fname, string lname, string phone, string email,  int tp,  List<Course> courses)
+        //public List<Course> Courses { get; set; }
+        public UIMember(int code, string fname, string lname, string phone, string email,  int tp  /*List<Course> courses*/)
         {
             Code = code;
             FirstName = fname;
@@ -24,8 +24,6 @@ namespace BLL.BLLModels
             Phone = phone;
             Email = email;
             TempOrPerm = tp;
-            Courses = courses;
-            Courses = courses; 
         }
         public UIMember()
         {

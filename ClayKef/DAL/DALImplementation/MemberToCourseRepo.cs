@@ -17,15 +17,7 @@ namespace DAL.DALImplementation
         {
             _context = context;
         }
-        public Task<int> Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<int> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
         public List<MemberToCourse> GetByCourse(int id)
         {
             
@@ -60,24 +52,21 @@ namespace DAL.DALImplementation
             }
         }*/
 
-        public List<int> GetAll(BaseQueryParams queryParams)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Post(int entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Put(int entity)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<MemberToCourse> GetByMember(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<MemberToCourse> DeleteByCourse(int code)
+        {
+            List< MemberToCourse> lst = _context.MemberToCourses.Where(mc =>mc.CourseCode == code).ToList(); 
+            foreach( MemberToCourse mc in lst)
+            {
+                _context.Remove(mc);
+            }
+            _context.SaveChanges();
+            return lst;
         }
     }
 }

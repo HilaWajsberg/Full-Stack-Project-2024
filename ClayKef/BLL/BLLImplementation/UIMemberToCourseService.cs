@@ -44,9 +44,10 @@ namespace BLL.BLLImplementation
             return coursesList;
         }*/
 
-        public Task<UIMember> RemoveMembersCourse(int id)
+        void RemoveMembersCourse(int code)
         {
-            throw new NotImplementedException();
+           memberCourseRepo.DeleteByCourse(code);
+            
         }
     }
 }

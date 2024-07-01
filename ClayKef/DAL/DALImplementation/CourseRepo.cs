@@ -33,17 +33,20 @@ namespace DAL.DALImplementation
                 await _context.SaveChangesAsync();
                 return course;
             }
-            throw new NotImplementedException();
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
-     /*   public async Task<Course> RemovePatientAsync(string id)
-        {
-            Course patient = _context.Courses.FirstOrDefault(p => p.Id == id);
-            if (patient != null)
-                _context.Courses.Remove(patient);
-            await _context.SaveChangesAsync();
-            return patient;
-        }*/
+        /*   public async Task<Course> RemovePatientAsync(string id)
+           {
+               Course patient = _context.Courses.FirstOrDefault(p => p.Id == id);
+               if (patient != null)
+                   _context.Courses.Remove(patient);
+               await _context.SaveChangesAsync();
+               return patient;
+           }*/
 
         public async Task<Course> Get(int id)
         {
@@ -53,8 +56,8 @@ namespace DAL.DALImplementation
 
         public List<Course> GetAll(BaseQueryParams queryParams)
         {
-            return _context.Courses.Include(c => c.AgeCodeNavigation).Include(c => c.CourseLevelCodeNavigation).Include(c => c.PricingCodeNavigation).Include(c => c.TimingCodeNavigation).ToList(); 
-            
+            return _context.Courses.Include(c => c.AgeCodeNavigation).Include(c => c.CourseLevelCodeNavigation).Include(c => c.PricingCodeNavigation).Include(c => c.TimingCodeNavigation).ToList();
+
         }
 
         public Course Post(Course entity)

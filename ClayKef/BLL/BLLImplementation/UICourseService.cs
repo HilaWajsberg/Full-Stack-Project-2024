@@ -96,7 +96,7 @@ namespace BLL.BLLImplementation
 
         public async Task<UICourse> RemoveCourse(int id)
         {
-            Task<Course> course = courseRepo.Delete(id);
+            Task<Course> course = courseRepo.Get(id);
             UICourse newCourse = new UICourse();
             newCourse.Code = course.Result.Code;
             newCourse.Name = course.Result.Name;
@@ -106,11 +106,11 @@ namespace BLL.BLLImplementation
             newCourse.Day = course.Result.TimingCodeNavigation.Day;
             newCourse.Hour = (float)course.Result.TimingCodeNavigation.Hour;
             newCourse.NumOfMembers = course.Result.NumOfMembers;
-           /* foreach(MemberToCourse memberTo in course.Result.MemberToCourseCodeNavigation.MemberCode)
-            {
-                
-            }*/
+            /* foreach(MemberToCourse memberTo in course.Result.MemberToCourseCodeNavigation.MemberCode)
+             {
 
+             }*/
+            courseRepo.Delete(id);
             return newCourse;
         }
 

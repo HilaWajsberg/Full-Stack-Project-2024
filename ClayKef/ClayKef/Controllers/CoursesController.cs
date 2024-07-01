@@ -35,5 +35,10 @@ namespace ClayKef.Controlleers
         {
             return await coursesService.GetCourseById(id);
         }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UICourse>> DeleteCourse(int id)
+        {
+            return await coursesService.RemoveCourse(id);
+        }
     }
 }
