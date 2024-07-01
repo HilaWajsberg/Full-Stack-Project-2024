@@ -16,12 +16,12 @@ namespace BLL.BLLImplementation
     {
         IMembersToCoursesRepo memberCourseRepo;
         IUIMemberService member;
-        IUICourseService courseService;
-        public UIMemberToCourseService(IMembersToCoursesRepo memberCourseRepo, IUIMemberService member, IUICourseService courseService)
+        //IUICourseService courseService;
+        public UIMemberToCourseService(IMembersToCoursesRepo memberCourseRepo, IUIMemberService member/*, IUICourseService courseServic*/)
         {
             this.memberCourseRepo = memberCourseRepo;
             this.member = member;
-            this.courseService = courseService;
+            //this.courseService = courseService;
         }
         public async Task<List<UIMember>> GetMembersByCourse(int id)
         {
@@ -33,7 +33,7 @@ namespace BLL.BLLImplementation
             }
             return membersList;
         }
-        public async Task<List<UICourse>> GetCourseByMember(int id)
+/*        public async Task<List<UICourse>> GetCourseByMember(int id)
         {
             List<MemberToCourse> courseMemberTask = memberCourseRepo.GetByMember(id);
             var coursesList = new List<UICourse>();
@@ -42,7 +42,7 @@ namespace BLL.BLLImplementation
                 coursesList.Add(courseService.GetCourseById(mc.CourseCode).Result);
             }
             return coursesList;
-        }
+        }*/
 
         public Task<UIMember> RemoveMembersCourse(int id)
         {

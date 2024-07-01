@@ -43,22 +43,22 @@ namespace DAL.DALImplementation
             }
         }
 
-        public List<MemberToCourse> GetByMember(int id)
+/*        public List<MemberToCourse> GetByMember(int id)
         {
 
-            /*            List<int> result = new List<int>();
+            *//*            List<int> result = new List<int>();
                         foreach(MemberToCourse cm in _context.MemberToCourses)
                         {
 
                         }*/
-            /*           List <MemberToCourse> membersCode = _context.MemberToCourses.Where(mc => mc.CourseCode == id).ToList();*/
+            /*           List <MemberToCourse> membersCode = _context.MemberToCourses.Where(mc => mc.CourseCode == id).ToList();*//*
             return _context.MemberToCourses.Where(mc => mc.MemberCode == id).ToList();
-            /*            List<Member> members = new List<Member>();
-                        foreach (MemberToCourse member in membersCode)*/
+            *//*            List<Member> members = new List<Member>();
+                        foreach (MemberToCourse member in membersCode)*//*
             {
 
             }
-        }
+        }*/
 
         public List<int> GetAll(BaseQueryParams queryParams)
         {
@@ -71,6 +71,11 @@ namespace DAL.DALImplementation
         }
 
         public int Put(int entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<MemberToCourse> GetByMember(int id)
         {
             throw new NotImplementedException();
         }
