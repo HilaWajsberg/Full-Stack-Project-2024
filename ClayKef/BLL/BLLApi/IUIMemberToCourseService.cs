@@ -11,6 +11,7 @@ namespace BLL.BLLApi
     public interface IUIMemberToCourseService
     {
         Task<List<UIMember>> GetMembersByCourse(int id);
+        Task<UIMemberToCourse> PostMemberToCourese(UIMemberToCourse entity);
         void RemoveMembersCourse(int code);
     }
 }

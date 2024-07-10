@@ -1,4 +1,5 @@
 ﻿using Common;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace DAL.DALApi
     {
         List<T> GetAll(BaseQueryParams queryParams);
         Task<T> Get(int id);
-        T Post(T entity);
+        Task<T> Post(T entity);
         Task<T> Delete(int id);
-        T Put(T entity);  
+         Task<T> Put(T entity);  
         
     }
 }

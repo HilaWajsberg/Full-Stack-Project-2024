@@ -68,5 +68,34 @@ namespace DAL.DALImplementation
             _context.SaveChanges();
             return lst;
         }
+
+        public List<MemberToCourse> GetAll(BaseQueryParams queryParams)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MemberToCourse> Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<MemberToCourse> Post(MemberToCourse entity)
+        {
+            MemberToCourse mem = entity;
+            if (mem != null)
+                _context.MemberToCourses.Add(mem);
+            await _context.SaveChangesAsync();
+            return mem ;
+        }
+
+        public Task<MemberToCourse> Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MemberToCourse> Put(MemberToCourse entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

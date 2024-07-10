@@ -34,6 +34,15 @@ namespace BLL.BLLImplementation
             return membersList;
         }
 
+        public async Task<UIMemberToCourse> PostMemberToCourese(UIMemberToCourse entity)
+        {
+            MemberToCourse memberToCourse = new MemberToCourse();
+            memberToCourse.MemberCode = entity.MemberCode;
+            memberToCourse.CourseCode = entity.CourseCode;
+            memberCourseRepo.Post(memberToCourse);
+            return entity;
+        }
+
         public void RemoveMembersCourse(int code)
         {
             memberCourseRepo.DeleteByCourse(code);

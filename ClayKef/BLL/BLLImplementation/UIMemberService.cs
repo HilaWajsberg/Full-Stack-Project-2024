@@ -28,6 +28,7 @@ namespace BLL.BLLImplementation
             newMember.Email = member.Result.Email;
             newMember.Phone = member.Result.CellPhone;
             newMember.Code = member.Result.Code;
+           
             return newMember;
         }
 

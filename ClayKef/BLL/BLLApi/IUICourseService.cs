@@ -1,5 +1,6 @@
 ﻿using BLL.BLLModels;
 using Common;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace BLL.BLLApi
         List<UICourse> GetFilteredCourses(BaseQueryParams queryParams);
         Task<UICourse> GetCourseById(int id);
         Task<UICourse> RemoveCourse(int id);
+  /*      Task<UICourse> PutCourse(int id);*/
+        Task<UICourse> PostCourse(UICourse entity);
     }
 }

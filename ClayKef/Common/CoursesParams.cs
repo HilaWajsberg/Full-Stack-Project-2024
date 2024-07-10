@@ -15,5 +15,7 @@ namespace Common
         public int Day { get; set; }
         public double Hour { get; set; }
         public double Price { get; set; }
+
+    
     }
 }
