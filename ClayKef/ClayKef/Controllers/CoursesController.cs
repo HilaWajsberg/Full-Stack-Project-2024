@@ -15,6 +15,7 @@ namespace ClayKef.Controlleers
     {
       
         IUICourseService coursesService;
+        IUIPriceService uIPriceService;
 
         public CoursesController(IUICourseService coursesService)
         {
@@ -26,10 +27,14 @@ namespace ClayKef.Controlleers
             return coursesService.GetCourses(*//*queryParams*//*);
          }*/
         [HttpGet]
-        public async Task<ActionResult<List<UICourse>>> GetCourses([FromQuery]CoursesParams queryParams)
+        public async Task<ActionResult<List<UICourse>>> GetCourses([FromQuery] CoursesParams queryParams)
         {
             return coursesService.GetFilteredCourses(queryParams);
         }
+        /*        public async Task<ActionResult<List<UIPrice>>> GetPrice([FromQuery] PriceParams queryParams)
+                {
+                    return uIPriceService.GetAllPricess(queryParams);
+                }*/
         [HttpGet("{id}")]
         public async Task<ActionResult<UICourse>> GetById(int id)
         {
@@ -39,6 +44,11 @@ namespace ClayKef.Controlleers
         public async Task<ActionResult<UICourse>> DeleteCourse(int id)
         {
             return await coursesService.RemoveCourse(id);
+        }
+        [HttpPost]
+        public async Task<ActionResult<UICourse>> AddCourse([FromBody] UICourse newCourse)
+        {
+            return await coursesService.PostCourse(newCourse);
         }
     }
 }

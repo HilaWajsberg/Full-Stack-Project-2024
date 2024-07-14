@@ -22,6 +22,13 @@ namespace BLL
             collection.AddScoped<IUICourseService, UICourseService>();
             collection.AddScoped<IUIMemberService, UIMemberService>();
             collection.AddScoped<IUIMemberToCourseService, UIMemberToCourseService>();
+            collection.AddScoped<IUIAgeService, UIAgeService>();
+            collection.AddScoped<IUILevelService, UILevelService>();
+            collection.AddScoped<IUIDurationService, UIDuratioService>();
+            collection.AddScoped<IUIProductTipeService, UIProductTipeService>();
+            collection.AddScoped<IUIPriceService, UIPriceService>();
+            collection.AddScoped<IUITimeService, UITImeService>();
+            collection.AddScoped<IUICourseService, UICourseService>();
             return collection;
         }
     }

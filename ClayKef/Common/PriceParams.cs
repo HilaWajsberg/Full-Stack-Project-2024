@@ -8,6 +8,7 @@ namespace Common
 {
     public class PriceParams:BaseQueryParams
     {
+        public int code { get; set; }
         public int price { get; set; }
     }
 }

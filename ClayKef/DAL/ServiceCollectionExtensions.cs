@@ -24,6 +24,14 @@ namespace DAL
             collection.AddScoped<ICourseRepo, CourseRepo>();
             collection.AddScoped<IMembersToCoursesRepo, MemberToCourseRepo>();
             collection.AddScoped<IMemberRepo, MemberRepo>();
+            collection.AddScoped<IAgeRepo, AgeRepo>(); // Assuming UIAgeService implements IUIAgeService
+            collection.AddScoped<ILevelRepo, LevelRepo>(); // Assuming LevelService implements ILevelService
+            collection.AddScoped<IDurationRepo, Durationrepo>(); // Assuming DurationService implements IDurationService
+            collection.AddScoped<IIProductTypeRepo, ProductTipeRepo>(); // Assuming ProductTypeService implements IProductTypeService
+            collection.AddScoped<IPriceRepo, PriceRepo>(); // Assuming PriceService implements IPriceService
+            collection.AddScoped<ITimeRepo, TimeRepo>(); // Assuming TimeService implements ITimeService
+
+
 
 
         }

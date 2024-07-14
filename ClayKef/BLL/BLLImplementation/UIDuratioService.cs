@@ -1,4 +1,5 @@
-﻿using BLL.BLLModels;
+﻿using BLL.BLLApi;
+using BLL.BLLModels;
 using Common;
 using DAL.DALApi;
 using DAL.Models;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BLL.BLLImplementation
 {
-    public class UIDuratioService
+    public class UIDuratioService: IUIDurationService
     {
         IDurationRepo durationRepo;
 
@@ -20,7 +21,7 @@ namespace BLL.BLLImplementation
         }
         public List<UIDuration> GetAllDurations(BaseQueryParams queryParams)
         {
-            var durationParams = queryParams as LevelParams;
+            var durationParams = queryParams as DurationParams;
             List<Duration> durationTask = durationRepo.GetAll(queryParams);
             var DurationList = new List<UIDuration>();
             foreach (var duration in durationTask)
@@ -31,13 +32,13 @@ namespace BLL.BLLImplementation
                 DurationList.Add(newDuration);
             }
             var queryable = DurationList.AsQueryable();
-            if (durationParams.code > 0)
+            if (durationParams.Code > 0)
             {
-                queryable = queryable.Where(c => c.Code == durationParams.code);
+                queryable = queryable.Where(c => c.Code == durationParams.Code);
             }
-            if (durationParams.type != null)
+            if (durationParams.Type != null)
             {
-                queryable = queryable.Where(c => c.Type == durationParams.type);
+                queryable = queryable.Where(c => c.Type == durationParams.Type);
             }
             return queryable.ToList();
         }

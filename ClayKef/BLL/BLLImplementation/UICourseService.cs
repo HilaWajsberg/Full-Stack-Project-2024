@@ -113,15 +113,15 @@ namespace BLL.BLLImplementation
 
             AgeParams ageParams = new AgeParams();
             ageParams.name = entity.Ageing;
-            newCourse.AgeCode = ageService.GetAllAges(ageParams)[1].Code;
+            newCourse.AgeCode = ageService.GetAllAges(ageParams)[0].Code;
 
             LevelParams levelParams = new LevelParams();
             levelParams.type = entity.Level;
-            newCourse.CourseLevelCode = levelService.GetAllLevels(levelParams)[1].Code;
+            newCourse.CourseLevelCode = levelService.GetAllLevels(levelParams)[0].Code;
 
             DurationParams durationParams = new DurationParams();
             durationParams.Type = entity.duration;
-            newCourse.DurationCode = durationService.GetAllDurations(durationParams)[1].Code;
+            newCourse.DurationCode = durationService.GetAllDurations(durationParams)[0].Code;
 
 
             if (entity.TypeProd != null && entity.TechniqueProd != null)
@@ -130,11 +130,12 @@ namespace BLL.BLLImplementation
                 ProductParams productParams = new ProductParams();
                 productParams.Type = entity.TypeProd;
                 productParams.Technique = entity.TechniqueProd;
-                newCourse.ProductTypeCode = productTipeService.GetAllProduct(productParams)[1].Code;
+                newCourse.ProductTypeCode = productTipeService.GetAllProduct(productParams)[0].Code;
             }
             PriceParams priceParams = new PriceParams();
             priceParams.price = entity.Price;
-            newCourse.PricingCode = priceService.GetAllPricess(priceParams)[1].Code;
+            /*            newCourse.PricingCode = priceService.GetAllPricess(priceParams)[0].Code;*/
+            newCourse.PricingCode = 101;
 
             UITime time = new UITime();
             time.Hour = entity.Hour;
@@ -147,20 +148,22 @@ namespace BLL.BLLImplementation
             TimeParams timeParams = new TimeParams();
             timeParams.Hour = entity.Hour;
             timeParams.Day = entity.Day;
-            newCourse.TimingCode = timeService.GetAllTimes(timeParams)[1].Code;
+            /*            newCourse.TimingCode = timeService.GetAllTimes(timeParams)[0].Code;*/
+            newCourse.Code = 401;
 
             newCourse.OpeningDate = entity.OpeningDate;
          
-            newCourse.NumOfMembers = entity.MembersCode.Count;
+/*            newCourse.NumOfMembers = entity.MembersCode.Count;*/
+            newCourse.NumOfMembers = entity.NumOfMembers;
             Task<Course> course = courseRepo.Post(newCourse);
-            foreach (int code in entity.MembersCode)
+/*            foreach (int code in entity.MembersCode)
             {
                 UIMemberToCourse uIMemberToCourse = new UIMemberToCourse();
                 uIMemberToCourse.MemberCode = code;
                 uIMemberToCourse.CourseCode = course.Id;
                 //הלוואי שיעבוד... ראית את הרעיון של איך יהיה הקוד של הקורס?
                 memberToCourseService.PostMemberToCourese(uIMemberToCourse);
-            }
+            }*/
             return  entity;
     /*        throw new NotImplementedException();*/
         }

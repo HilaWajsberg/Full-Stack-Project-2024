@@ -32,12 +32,12 @@ namespace DAL.DALImplementation
             return _context.Members.ToList();
         }
 
-        public Member Post(Member entity)
+        public Task<Member> Post(Member entity)
         {
             throw new NotImplementedException();
         }
 
-        public Member Put(Member entity)
+        public Task<Member> Put(Member entity)
         {
             throw new NotImplementedException();
         }

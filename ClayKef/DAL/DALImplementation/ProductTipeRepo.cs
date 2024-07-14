@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DAL.DALImplementation
 {
-    public class ProductTipeRepo : IProductType
+    public class ProductTipeRepo : IIProductTypeRepo
     {
         DBContext _context;
 
